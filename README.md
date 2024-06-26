@@ -1,6 +1,10 @@
 # etodets.github.io
-тест 12345
+тест 1234567890
 
+
+[YouTube](https://www.youtube.com/)
+
+[Links](http://localhost/)
 
 ### Features
 
@@ -25,18 +29,7 @@
 
 [TOC]
 
-#H1 header
-##H2 header
-###H3 header
-####H4 header
-#####H5 header
-######H6 header
-#Heading 1 link [Heading link](https://github.com/pandao/editor.md "Heading link")
-##Heading 2 link [Heading link](https://github.com/pandao/editor.md "Heading link")
-###Heading 3 link [Heading link](https://github.com/pandao/editor.md "Heading link")
-####Heading 4 link [Heading link](https://github.com/pandao/editor.md "Heading link") Heading link [Heading link](https://github.com/pandao/editor.md "Heading link")
-#####Heading 5 link [Heading link](https://github.com/pandao/editor.md "Heading link")
-######Heading 6 link [Heading link](https://github.com/pandao/editor.md "Heading link")
+
 
 ##Headers (Underline)
 
@@ -85,11 +78,17 @@ GFM a-tail link @pandao
 
 ###Code Blocks (multi-language) & highlighting
 
-####Inline code
+**Inline code**
+
+```$ npm install marked```
+
+``$ npm install marked``
 
 `$ npm install marked`
 
-####Code Blocks (Indented style)
+ 
+ 
+**Code Blocks (Indented style)**
 
 Indented 4 spaces, like `<pre>` (Preformatted Text).
 
@@ -145,7 +144,7 @@ var testBox = box();
 testBox.add("jQuery").remove("jQuery");
 ```
 
-####HTML code
+**HTML code**
 
 ```html
 <!DOCTYPE html>
