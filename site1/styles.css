@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(to bottom, #2c3e50, #34495e); /* Градиент для ночного времени */
+    color: white; /* Цвет текста */
+}
+nav {
+    margin-top: 20px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin: 10px 0;
+}
+a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2980b9; /* Цвет кнопки */
+    color: white; /* Цвет текста кнопки */
+    text-decoration: none;
+    border-radius: 25px; /* Скругление кнопок */
+    transition: background-color 0.3s;
+}
+a:hover {
+    background-color: #3498db; /* Цвет кнопки при наведении */
+}
