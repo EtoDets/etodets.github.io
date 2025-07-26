@@ -9,17 +9,17 @@
   "packages": [
     {
       "language": "en_us",
-      "description": "Tip: The default startup command is \"sh ./run.sh\". If you need to run it on Windows, please change start command to \"run.bat\" after installation.",
-      "title": "Forge 1.7.10 (Supports Mods)",
-      "runtime": "Java 7+",
-      "hardware": "RAM 8G+",
+      "description": "Run on Windows",
+      "title": "Forge 1.7.10",
+      "runtime": "Java 8+",
+      "hardware": "RAM 8G",
       "size": "5MB",
       "remark": "Minecraft Forge",
       "targetLink": "https://maven.minecraftforge.net/net/minecraftforge/forge/1.7.10-10.13.4.1614-1.7.10/forge-1.7.10-10.13.4.1614-1.7.10-installer.jar",
       "author": "minecraftforge.net",
       "setupInfo": {
         "type": "minecraft/java/forge",
-        "startCommand": "\"C:\\Users\\root\\MCSManager\\zulu8\\bin\\java.exe\" -Xmx8192M -Dfile.encoding=UTF-8 -Duser.language=ru -Duser.country=RU -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar nogui",
+        "startCommand": "echo eula=true > eula.txt && \"C:\\Users\\root\\MCSManager\\zulu8\\bin\\java.exe\" -Xmx8192M -Dfile.encoding=UTF-8 -Duser.language=ru -Duser.country=RU -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar nogui",
         "stopCommand": "stop",
         "updateCommand": "C:\\Users\\root\\MCSManager\\zulu8\\bin\\java.exe -jar forge-1.7.10-10.13.4.1614-1.7.10-installer.jar --installServer",
         "ie": "utf-8",
