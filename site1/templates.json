@@ -19,7 +19,7 @@
       "author": "minecraftforge.net",
       "setupInfo": {
         "type": "minecraft/java/forge",
-        "startCommand": "echo #By changing the setting below to TRUE you are indicating your agreement to our EULA (https://account.mojang.com/documents/minecraft_eula). > eula.txt && echo #Sat Jul 26 22:02:21 MSK 2025 >> eula.txt && echo eula=true >> eula.txt && \"C:\\Users\\root\\MCSManager\\zulu8\\bin\\java.exe\" -Xmx8192M -Dfile.encoding=UTF-8 -Duser.language=ru -Duser.country=RU -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar nogui",
+        "startCommand": "if (Test-Path eula.txt) { (Get-Content eula.txt) -replace 'eula=false','eula=true' | Set-Content eula.txt } else { echo eula=true > eula.txt }; \"C:\\Users\\root\\MCSManager\\zulu8\\bin\\java.exe\" -Xmx8192M -Dfile.encoding=UTF-8 -Duser.language=ru -Duser.country=RU -jar forge-1.7.10-10.13.4.1614-1.7.10-universal.jar nogui",
         "stopCommand": "stop",
         "updateCommand": "C:\\Users\\root\\MCSManager\\zulu8\\bin\\java.exe -jar forge-1.7.10-10.13.4.1614-1.7.10-installer.jar --installServer",
         "ie": "utf-8",
