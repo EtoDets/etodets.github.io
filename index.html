@@ -3,111 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Замена букв</title>
+    <title>Главная</title>
     <style>
+        html {
+            background-color: #c2cbd4;
+        }
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 80vh;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: Tahoma, Arial, sans-serif;
+            margin: 0;
+            color: #222;
         }
-        textarea {
-            width: 70%;
+        main {
             max-width: 500px;
-            margin: 10px 0;
-            padding: 8px;
-            font-size: 14px;
+            margin: 60px auto;
+            padding: 4px;
+            background: #ece9d8;
+            border: 1px solid #8997a7;
+            box-shadow: inset 1px 1px #fff, 3px 3px 0 #bbc4ce;
         }
-        button {
-            padding: 8px 16px;
-            font-size: 14px;
-            cursor: pointer;
-            margin: 5px;
+        h1 {
+            margin: 0;
+            padding: 8px 12px;
+            background: linear-gradient(to right, #42658b, #8aa5bf);
+            border: 1px solid #365778;
+            color: white;
+            font-size: 18px;
+            text-shadow: 1px 1px #365778;
         }
-        .example {
-            margin: 20px 0;
-            font-size: 16px;
-            font-weight: bold;
+        section {
+            margin: 12px 8px;
+            border: 1px solid #c5c4b8;
+            background: #faf9f4;
+            box-shadow: inset 1px 1px #fff;
         }
-        .button-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
+        h2 {
+            margin: 0;
+            padding: 6px 10px;
+            background: linear-gradient(#f4f3ea, #e5e4d8);
+            border-bottom: 1px solid #d3d2c6;
+            color: #435a73;
+            font-size: 13px;
         }
-        .copied-message {
-            display: none;
-            margin-top: 10px;
-            color: green;
-            font-size: 14px;
+        ul {
+            margin: 0;
+            padding: 4px 12px 4px 32px;
+        }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #c5c4b8;
+        }
+        li:last-child {
+            border-bottom: 0;
+        }
+        li::marker {
+            color: #8297ad;
+        }
+        a {
+            color: #244e91;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+        a:hover {
+            color: #a34030;
+        }
+        a:focus-visible {
+            outline: 2px dotted #244e91;
+            outline-offset: 3px;
+        }
+        @media (max-width: 560px) {
+            main {
+                margin: 30px 16px;
+            }
         }
     </style>
-    <script>
-        function replaceLetters() {
-            const inputText = document.getElementById("inputText").value;
-            const replacements = {
-                'А': 'A', 'Б': '6', 'В': 'B', 'Г': 'r', 'Д': 'D', 'Е': 'E', 'Ё': 'E', 'Ж': ')I(', 'З': '3',
-                'И': 'u', 'К': 'K', 'Л': 'Jl', 'М': 'M', 'Н': 'H', 'О': 'O', 'П': 'n', 'Р': 'p', 'С': 'C',
-                'Т': 'T', 'У': 'Y', 'Ф': 'F', 'Х': 'X', 'Ц': 'u', 'Ч': '4', 'Ш': 'W', 'Щ': 'W', 'Ъ': '',
-                'Ы': 'bl', 'Ь': 'b', 'Э': 'E', 'Ю': 'I-O', 'Я': '9l',
-                'а': 'a', 'б': '6', 'в': 'B', 'г': 'r', 'д': 'g', 'е': 'e', 'ё': 'e', 'ж': ')l(', 'з': '3',
-                'и': 'u', 'к': 'k', 'л': 'Jl', 'м': 'm', 'н': 'H', 'о': 'o', 'п': 'n', 'р': 'p', 'с': 'c',
-                'т': 't', 'у': 'y', 'ф': 'f', 'х': 'x', 'ц': 'u', 'ч': '4', 'ш': 'w', 'щ': 'w', 'ъ': '',
-                'ы': 'bl', 'ь': 'b', 'э': 'e', 'ю': 'l-o', 'я': '9l'
-            };
-
-            let outputText = inputText.split('').map(char => replacements[char] || char).join('');
-            document.getElementById("outputText").value = outputText;
-        }
-
-        function copyToClipboard() {
-            const outputText = document.getElementById("outputText");
-            outputText.select();
-            document.execCommand("copy");
-
-            const copiedMessage = document.getElementById("copiedMessage");
-            copiedMessage.style.display = "block";
-            setTimeout(() => {
-                copiedMessage.style.display = "none";
-            }, 200); // timer
-        }
-
-        function clearResult() {
-            document.getElementById("outputText").value = '';
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("inputText").addEventListener("keypress", function(event) {
-                if (event.key === "Enter") {
-                    event.preventDefault();
-                    replaceLetters();
-                }
-            });
-        });
-    </script>
 </head>
 <body>
-    <h1>Замена русских букв на латинские символы</h1>
-    <textarea id="inputText" rows="6" placeholder="Введите текст..."></textarea>
-    <button onclick="replaceLetters()">Заменить</button>
-    <textarea id="outputText" rows="6" placeholder="Результат..." readonly></textarea>
-
-    <div class="button-group">
-        <button onclick="copyToClipboard()">Скопировать результат</button>
-        <button onclick="clearResult()">Очистить результат</button>
-    </div>
-
-    <div id="copiedMessage" class="copied-message">Результат скопирован!</div>
-
-    <div class="example">Пример: "Привет" → "npuBet"</div>
-    <ul>
-        <li><a href="site1/index.html">Сайт 1</a></li>
-    </ul>
+    <main>
+        <h1>Меню</h1>
+        <nav aria-label="Главное меню">
+            <section aria-labelledby="local-heading">
+                <h2 id="local-heading">На этом сайте</h2>
+                <ul>
+                    <li><a href="translit_ru_eu/index.html">Русские имена (ники) латинскими буквами</a></li>
+                    <li><a href="bbcode/BBcode.html">BBcode</a></li>
+                </ul>
+            </section>
+            <section aria-labelledby="external-heading">
+                <h2 id="external-heading">Внешние сайты</h2>
+                <ul>
+                    <li><a href="https://sandspiel.club/">sandspiel.club</a></li>
+                    <li><a href="https://files.xmdhs.com/curseforge">files.xmdhs.com - CurseForge</a></li>
+                </ul>
+            </section>
+        </nav>
+    </main>
 </body>
-    <footer>
-    <a href="https://web.archive.org/web/20190602070827/http://джада.рф/symreplacer">WebArchive</a>
-  </footer>
 </html>
