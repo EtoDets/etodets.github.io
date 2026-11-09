@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная</title>
+    <style>
+        html {
+            background-color: #c2cbd4;
+        }
+        body {
+            font-family: Tahoma, Arial, sans-serif;
+            margin: 0;
+            color: #222;
+        }
+        main {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 4px;
+            background: #ece9d8;
+            border: 1px solid #8997a7;
+            box-shadow: inset 1px 1px #fff, 3px 3px 0 #bbc4ce;
+        }
+        h1 {
+            margin: 0;
+            padding: 8px 12px;
+            background: linear-gradient(to right, #42658b, #8aa5bf);
+            border: 1px solid #365778;
+            color: white;
+            font-size: 18px;
+            text-shadow: 1px 1px #365778;
+        }
+        section {
+            margin: 12px 8px;
+            border: 1px solid #c5c4b8;
+            background: #faf9f4;
+            box-shadow: inset 1px 1px #fff;
+        }
+        h2 {
+            margin: 0;
+            padding: 6px 10px;
+            background: linear-gradient(#f4f3ea, #e5e4d8);
+            border-bottom: 1px solid #d3d2c6;
+            color: #435a73;
+            font-size: 13px;
+        }
+        ul {
+            margin: 0;
+            padding: 4px 12px 4px 32px;
+        }
+        li {
+            padding: 8px 0;
+            border-bottom: 1px dotted #c5c4b8;
+        }
+        li:last-child {
+            border-bottom: 0;
+        }
+        li::marker {
+            color: #8297ad;
+        }
+        a {
+            color: #244e91;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+        a:hover {
+            color: #a34030;
+        }
+        a:focus-visible {
+            outline: 2px dotted #244e91;
+            outline-offset: 3px;
+        }
+        @media (max-width: 560px) {
+            main {
+                margin: 30px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Меню</h1>
+        <nav aria-label="Главное меню">
+            <section aria-labelledby="local-heading">
+                <h2 id="local-heading">На этом сайте</h2>
+                <ul>
+                    <li><a href="translit_ru_eu/index.html">Русские имена (ники) латинскими буквами</a></li>
+                    <li><a href="bbcode/BBcode.html">BBcode</a></li>
+                </ul>
+            </section>
+            <section aria-labelledby="external-heading">
+                <h2 id="external-heading">Внешние сайты</h2>
+                <ul>
+                    <li><a href="https://sandspiel.club/">sandspiel.club</a></li>
+                    <li><a href="https://files.xmdhs.com/curseforge">files.xmdhs.com - CurseForge</a></li>
+                </ul>
+            </section>
+        </nav>
+    </main>
+</body>
+</html>
