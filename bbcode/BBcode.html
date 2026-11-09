@@ -2,36 +2,87 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Конвертер ссылок и текста в BBCode</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
+            font-family: Tahoma, Arial, sans-serif;
+            background: #c2cbd4;
+            color: #222;
+            margin: 0;
         }
+        main {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 4px;
+            background: #ece9d8;
+            border: 1px solid #8997a7;
+            box-shadow: inset 1px 1px #fff, 3px 3px 0 #bbc4ce;
+        }
+        h1 {
+            margin: 0;
+            padding: 8px 12px;
+            background: linear-gradient(to right, #42658b, #8aa5bf);
+            border: 1px solid #365778;
+            color: white;
+            font-size: 18px;
+            text-shadow: 1px 1px #365778;
+        }
+        .content {
+            margin: 12px 8px;
+            padding: 12px;
+            background: #faf9f4;
+            border: 1px solid #c5c4b8;
+        }
+        a { color: #244e91; }
         input, textarea {
+            display: block;
             width: 100%;
             margin-bottom: 10px;
-            padding: 5px;
+            padding: 8px;
+            font: inherit;
+            border: 1px solid #a5a79d;
+            background: #fff;
+        }
+        :focus-visible {
+            outline: 2px dotted #244e91;
+            outline-offset: 2px;
+        }
+        @media (max-width: 640px) {
+            main { margin: 30px 16px; }
         }
         .button-container {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
         }
         button {
-            padding: 5px 10px;
+            padding: 7px 10px;
             flex-grow: 1;
             cursor: pointer;
+            font: inherit;
+            color: #263f59;
+            background: linear-gradient(#fff, #e5e4d8);
+            border: 1px solid #a3a99f;
+        }
+        button:not(.color-option):hover { background: #e6edf4; }
+        button:not(.color-option):active { background: #d6dfe8; }
+        .format-buttons > button[aria-pressed="true"], .format-buttons > button[aria-pressed="true"]:hover {
+            background: #c4d4e4;
+            border-color: #587794;
+            box-shadow: inset 1px 1px 3px #899eaf;
         }
         .format-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 5px;
             margin-bottom: 10px;
             position: relative;
         }
         .template-buttons {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
             margin-top: 10px;
             margin-bottom: 10px;
@@ -64,6 +115,9 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
         .color-option {
+            flex: none;
+            padding: 0;
+            background-image: none;
             width: 30px;
             height: 30px;
             border: 2px solid #ddd;
@@ -75,33 +129,49 @@
             transform: scale(1.1);
             border-color: #999;
         }
+        .color-option[aria-pressed="true"] {
+            border-color: #617d99;
+            box-shadow: 0 0 0 1px #617d99;
+        }
         .color-button-container {
             position: relative;
+        }
+        #colorSwatch {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-left: 4px;
+            border: 1px solid #8997a7;
+            vertical-align: middle;
+            background: white;
         }
     </style>
 </head>
 <body>
+    <main>
     <h1>Конвертер в BBCode</h1>
+    <div class="content">
+    <p><a href="../index.html">← Главное меню</a></p>
     
     <div class="format-buttons">
-        <button onclick="applyFormat('b')">Жирный</button>
-        <button onclick="applyFormat('i')">Курсив</button>
-        <button onclick="applyFormat('u')">Подчеркнутый</button>
+        <button id="format-b" aria-pressed="false" onclick="applyFormat('b')">Жирный</button>
+        <button id="format-i" aria-pressed="false" onclick="applyFormat('i')">Курсив</button>
+        <button id="format-u" aria-pressed="false" onclick="applyFormat('u')">Подчеркнутый</button>
         <div class="color-button-container">
-            <button onclick="toggleColorMenu()">Цвет</button>
+            <button onclick="toggleColorMenu()">Цвет <span id="colorSwatch" aria-hidden="true"></span></button>
             <div class="color-menu" id="colorMenu">
-                <div class="color-option" style="background-color: red;" onclick="applyColor('red')" title="Красный"></div>
-                <div class="color-option" style="background-color: blue;" onclick="applyColor('blue')" title="Синий"></div>
-                <div class="color-option" style="background-color: green;" onclick="applyColor('green')" title="Зеленый"></div>
-                <div class="color-option" style="background-color: yellow;" onclick="applyColor('yellow')" title="Желтый"></div>
-                <div class="color-option" style="background-color: purple;" onclick="applyColor('purple')" title="Фиолетовый"></div>
-                <div class="color-option" style="background-color: orange;" onclick="applyColor('orange')" title="Оранжевый"></div>
-                <div class="color-option" style="background-color: pink;" onclick="applyColor('pink')" title="Розовый"></div>
-                <div class="color-option" style="background-color: brown;" onclick="applyColor('brown')" title="Коричневый"></div>
-                <div class="color-option" style="background-color: black;" onclick="applyColor('black')" title="Черный"></div>
-                <div class="color-option" style="background-color: white; border: 2px solid #000;" onclick="applyColor('white')" title="Белый"></div>
-                <div class="color-option" style="background-color: gray;" onclick="applyColor('gray')" title="Серый"></div>
-                <div class="color-option" style="background-color: cyan;" onclick="applyColor('cyan')" title="Голубой"></div>
+                <button type="button" class="color-option" style="background-color: red;" onclick="applyColor('red')" title="Красный" aria-label="Красный"></button>
+                <button type="button" class="color-option" style="background-color: blue;" onclick="applyColor('blue')" title="Синий" aria-label="Синий"></button>
+                <button type="button" class="color-option" style="background-color: green;" onclick="applyColor('green')" title="Зеленый" aria-label="Зеленый"></button>
+                <button type="button" class="color-option" style="background-color: yellow;" onclick="applyColor('yellow')" title="Желтый" aria-label="Желтый"></button>
+                <button type="button" class="color-option" style="background-color: purple;" onclick="applyColor('purple')" title="Фиолетовый" aria-label="Фиолетовый"></button>
+                <button type="button" class="color-option" style="background-color: orange;" onclick="applyColor('orange')" title="Оранжевый" aria-label="Оранжевый"></button>
+                <button type="button" class="color-option" style="background-color: pink;" onclick="applyColor('pink')" title="Розовый" aria-label="Розовый"></button>
+                <button type="button" class="color-option" style="background-color: brown;" onclick="applyColor('brown')" title="Коричневый" aria-label="Коричневый"></button>
+                <button type="button" class="color-option" style="background-color: black;" onclick="applyColor('black')" title="Черный" aria-label="Черный"></button>
+                <button type="button" class="color-option" style="background-color: white;" onclick="applyColor('white')" title="Белый" aria-label="Белый"></button>
+                <button type="button" class="color-option" style="background-color: gray;" onclick="applyColor('gray')" title="Серый" aria-label="Серый"></button>
+                <button type="button" class="color-option" style="background-color: cyan;" onclick="applyColor('cyan')" title="Голубой" aria-label="Голубой"></button>
             </div>
         </div>
     </div>
@@ -113,19 +183,39 @@
         <button onclick="insertAbandonedVoice()">Озвучка заброшена</button>
     </div>
 
-    <input type="text" id="inputText" placeholder="Вставьте текст или ссылку" oninput="convertToBBCode()">
-    <textarea id="bbcodeOutput" rows="4" readonly placeholder="BBCode версия"></textarea>
+    <input type="text" id="inputText" aria-label="Текст или ссылка" placeholder="Вставьте текст или ссылку" oninput="convertToBBCode()">
+    <textarea id="bbcodeOutput" aria-label="Результат в BBCode" rows="4" readonly placeholder="BBCode версия"></textarea>
     
     <div class="button-container">
         <button onclick="copyToClipboard()">Копировать</button>
         <button onclick="clearFields()">Очистить</button>
     </div>
 
-    <div class="notification" id="notification">Скопировано!</div>
+    </div>
+    </main>
+    <div class="notification" id="notification" role="status">Скопировано!</div>
 
     <script>
         let currentText = '';
         let isLink = false;
+
+        function updateFormatButtons() {
+            const output = document.getElementById('bbcodeOutput').value;
+            const start = isLink ? output.indexOf(`[url=${currentText}]`) : -1;
+            const end = start === -1 ? -1 : output.indexOf('[/url]', start);
+            const formatted = isLink ? (end === -1 ? '' : output.slice(start, end)) : output;
+            const color = formatted.match(/\[color=([^\]]+)\]/);
+            document.getElementById('colorSwatch').style.backgroundColor = color ? color[1] : 'white';
+            document.querySelectorAll('.color-option').forEach(option => {
+                option.setAttribute('aria-pressed', String(!!color && option.style.backgroundColor === color[1]));
+            });
+            for (const type of ['b', 'i', 'u']) {
+                document.getElementById(`format-${type}`).setAttribute('aria-pressed', String(formatted.includes(`[${type}]`) && formatted.includes(`[/${type}]`)));
+            }
+        }
+
+        document.addEventListener('click', updateFormatButtons);
+        document.addEventListener('input', updateFormatButtons);
 
         function convertToBBCode() {
             const inputText = document.getElementById('inputText');
@@ -138,7 +228,7 @@
                 // Проверка на ссылку
                 try {
                     new URL(text);
-                    bbcode = `[url=${text}] [b] [color=blue] Смотреть [/color][/b] [/url]`;
+                    bbcode = `[url=${text}] [b] [color=gray] Смотреть [/color][/b] [/url]`;
                     isLink = true;
                 } catch (error) {
                     // Если не ссылка, оставляем как есть
@@ -159,6 +249,22 @@
             const text = inputText.value.trim();
 
             if (!text) return;
+
+            if (isLink) {
+                const start = bbcodeOutput.value.indexOf(`[url=${currentText}]`);
+                const end = bbcodeOutput.value.indexOf('[/url]', start);
+                if (start === -1 || end === -1) return;
+                let link = bbcodeOutput.value.slice(start, end + 6);
+                const open = `[${type}]`;
+                const close = `[/${type}]`;
+                if (link.includes(open)) {
+                    link = link.replace(open, '').replace(close, '');
+                } else {
+                    link = link.replace(/(\[color=[^\]]+\] Смотреть \[\/color\])/, `${open}$1${close}`);
+                }
+                bbcodeOutput.value = bbcodeOutput.value.slice(0, start) + link + bbcodeOutput.value.slice(end + 6);
+                return;
+            }
 
             let bbcode;
             switch(type) {
@@ -194,8 +300,7 @@
 
             // Если это ссылка, меняем только цвет внутри ссылки
             if (isLink) {
-                // Сохраняем исходный формат ссылки, но меняем цвет
-                bbcodeOutput.value = `[url=${currentText}] [b] [color=${color}] Смотреть [/color] [/b] [/url]`;
+                bbcodeOutput.value = bbcodeOutput.value.replace(/(\[url=[^\]]+\][\s\S]*?\[color=)[^\]]+(\] Смотреть \[\/color\])/, `$1${color}$2`);
             } else {
                 // Если обычный текст, применяем цвет ко всему тексту
                 bbcodeOutput.value = `[color=${color}]${text}[/color]`;
@@ -207,7 +312,7 @@
             const colorMenu = document.getElementById('colorMenu');
             const colorButton = document.querySelector('.color-button-container button');
             
-            if (!colorMenu.contains(event.target) && event.target !== colorButton) {
+            if (!colorMenu.contains(event.target) && !colorButton.contains(event.target)) {
                 colorMenu.style.display = 'none';
             }
         });
@@ -236,7 +341,7 @@
             
             try {
                 new URL(text); // проверяем, является ли ссылкой
-                const bbcode = `[color=#000066] Медленная озвучка [/color] - [url=${text}] [b] [color=blue] Смотреть [/color][/b] [/url]`;
+                const bbcode = `[color=#000066] Медленная озвучка [/color] - [url=${text}] [b] [color=gray] Смотреть [/color][/b] [/url]`;
                 bbcodeOutput.value = bbcode;
                 currentText = text;
                 isLink = true;
@@ -261,7 +366,7 @@
             
             try {
                 new URL(text);
-                const bbcode = `[color=#990000] Озвучка заброшена [/color] - [url=${text}] [b] [color=blue] Смотреть [/color][/b] [/url]`;
+                const bbcode = `[color=#990000] Озвучка заброшена [/color] - [url=${text}] [b] [color=gray] Смотреть [/color][/b] [/url]`;
                 bbcodeOutput.value = bbcode;
                 currentText = text;
                 isLink = true;
@@ -284,17 +389,18 @@
             bbcodeOutput.select();
             bbcodeOutput.setSelectionRange(0, 99999);
 
+            const text = bbcodeOutput.value;
             try {
-                navigator.clipboard.writeText(bbcodeOutput.value).then(function() {
+                navigator.clipboard.writeText(text).then(function() {
                     notification.style.display = 'block';
                     setTimeout(function() {
                         notification.style.display = 'none';
                     }, 2000);
                 }).catch(function(err) {
-                    fallbackCopyText(bbcodeOutput.value);
+                    fallbackCopyText(text);
                 });
             } catch (err) {
-                fallbackCopyText(bbcodeOutput.value);
+                fallbackCopyText(text);
             }
         }
 
@@ -304,7 +410,7 @@
             document.body.appendChild(textArea);
             textArea.select();
             try {
-                document.execCommand('copy');
+                if (!document.execCommand('copy')) throw new Error('Копирование отклонено');
                 const notification = document.getElementById('notification');
                 notification.style.display = 'block';
                 setTimeout(function() {
